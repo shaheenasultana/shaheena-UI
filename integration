@@ -14,7 +14,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file tarfile http://54.89.154.243:8081//repository/"
+                    sh "curl -v -u admin:admin --upload-file tarfile.tar http://54.89.154.243:8081//repository/"
                 }
             }
         }
