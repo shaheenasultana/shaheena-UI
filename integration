@@ -14,14 +14,14 @@ pipeline {
       stage("Checkout the code") {
             steps {
                 script {
-                   sh  "git clone https://github.com/shaheenasultana/shaheena-UI.git"
+                   git branch: 'dev', url: 'https://github.com/shaheenasultana/shaheena-UI.git'
                 }
                }
             }
         stage("Maven Build") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file tar2.tar http://54.89.154.243:8081//repository/"
+                    sh "curl -v -u admin:admin --upload-file webapp http://54.89.154.243:8081//repository/"
                 }
             }
         }
