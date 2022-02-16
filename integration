@@ -6,7 +6,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "34.238.154.222:8081"
+        NEXUS_URL = "54.89.154.243:8081"
         NEXUS_REPOSITORY = "maven-releases/${BUILD_NUMBER}"
         NEXUS_CREDENTIAL_ID = "nexus"
     }
@@ -14,7 +14,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn package -DskipTests=true"
+                    sh "curl -v -u admin:admin --upload-file tarfile http://54.89.154.243:8081//repository/"
                 }
             }
         }
