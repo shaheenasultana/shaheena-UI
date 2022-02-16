@@ -11,6 +11,13 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
+      stage("Checkout the code") {
+            steps {
+                script {
+                   sh  "git clone https://github.com/shaheenasultana/shaheena-UI.git"
+                }
+               }
+            }
         stage("Maven Build") {
             steps {
                 script {
