@@ -11,7 +11,7 @@ pipeline {
       stage("build code") {
             steps {
                 script {
-                   sh tar -cvf $UI_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar index.html
+                   sh "tar -cvf $UI_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar index.html"
                    sh "ls -l $UI_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar"
                 }
                }
