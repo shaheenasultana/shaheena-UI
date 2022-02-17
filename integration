@@ -10,15 +10,13 @@ pipeline {
         NEXUS_REPOSITORY = "maven-releases/${BUILD_NUMBER}"
         NEXUS_CREDENTIAL_ID = "nexus"
     }
-     stages {
-        stage("Checkout the code") {
+    stages {
+      stage("Checkout the code") {
             steps {
                 script {
                    sh  "git clone https://github.com/shaheenasultana/shaheena-UI.git"
                 }
             }
-        }
-    stages {
         stage("Maven Build") {
             steps {
                 script {
