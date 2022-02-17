@@ -12,7 +12,8 @@ pipeline {
             steps {
                 script {
                    sh "tar -cvf $UI_${my_date}_BUILD_${BUILD_NUMBER}.tar index.html"
-                   sh "ls -l $UI_${my_date}_BUILD_${BUILD_NUMBER}.tar"
+                   sh "gzip $UI_${my_date}_BUILD_${BUILD_NUMBER}.tar"
+                   sh "ls -l $UI_${my_date}_BUILD_${BUILD_NUMBER}.tar.gz"
                 }
                }
             }
