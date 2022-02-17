@@ -19,7 +19,7 @@ pipeline {
         stage("publish to nexus") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file UI.tar http://54.89.154.243:8081/repository/"
+                    sh "curl -v -u admin:admin --upload-file UI.tar http://54.89.154.243:8081/repository/UI-builds/dev/UI.tar"
                 }
             }
         }
