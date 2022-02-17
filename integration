@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        maven "maven_home"
-    }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
@@ -11,53 +8,18 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "nexus"
     }
     stages {
-      stage("Checkout the code") {
+      stage("build code") {
             steps {
                 script {
-                   sh 'rm -rf *'
-                   sh "git clone https://github.com/shaheenasultana/shaheena-UI.git"
+                   sh "tar -cvf UI.tar index.html "
+                   sh "ls -l UI.tar"
                 }
                }
             }
-        stage("Maven Build") {
+        stage("publish to nexus") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file tar3.tar http://54.89.154.243:8081/repository/"
-                }
-            }
-        }
-        stage("Publish to Nexus Repository Manager") {
-            steps {
-                script{
-                    pom = readMavenPom file: "pom.xml";
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path;
-                    artifactExists = fileExists artifactPath;
-                    if(artifactExists) {
-                        echo "* File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: NEXUS_REPOSITORY,
-                            credentialsId: NEXUS_CREDENTIAL_ID,
-                            artifacts: [
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: artifactPath,
-                                type: pom.packaging],
-                                [artifactId: pom.artifactId,
-                                classifier: '',
-                                file: "pom.xml",
-                                type: "pom"]
-                            ]
-                        );
-                    } else {
-                        error "* File: ${artifactPath}, could not be found";
-                    }
+                    sh "curl -v -u admin:admin --upload-file UI.tar http://54.89.154.243:8081/repository/"
                 }
             }
         }
