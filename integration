@@ -14,7 +14,7 @@ pipeline {
       stage("Checkout the code") {
             steps {
                 script {
-                   sh  "git clone https://github.com/shaheenasultana/shaheena-UI.git"
+                   git branch: 'dev', url: 'https://github.com/shaheenasultana/shaheena-UI.git'
                 }
                }
             }
