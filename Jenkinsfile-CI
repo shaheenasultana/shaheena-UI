@@ -17,9 +17,7 @@ pipeline {
                 }
             }
         }
-        stage ('run deploy job') {
-    build job: 'dev-UI-deploy'
-}
+        
        
         
         
