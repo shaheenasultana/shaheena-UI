@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("build code") {
+            steps {
+                script {
+                   sh "tar -cvf UI.tar index.html "
+                   sh "ls -l UI.tar"
+                }
+               }
+            }
+        stage("publish to nexus") {
+            steps {
+                script {
+                    sh "curl -v -u admin:admin --upload-file UI.tar http://54.158.184.155:8081/repository/UI-builds/dev/UI.tar"
+                }
+            }
+        }
+       
+        
+        
+    }
+    
+}
