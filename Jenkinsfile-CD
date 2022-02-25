@@ -5,10 +5,10 @@ pipeline {
             steps {
                 script {
                      sh '''
-                     ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@3.22.77.128 << EOF
+                     ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@18.222.68.96 << EOF
                      mkdir -p /tmp/shaheena
                      cd /tmp/shaheena
-                     curl -u admin:admin -O http://54.158.184.155:8081/repository/UI-builds/dev/UI.tar
+                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar
                      tar -xvf UI.tar
                      cat index.html
                      sudo cp index.html /var/www/html
