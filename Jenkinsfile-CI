@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage("build code") {
+            steps {
+                script {
+                   sh "tar -cvf UI.tar index.html "
+                   sh "ls -l UI.tar"
+                }
+               }
+            }
+        stage("publish to nexus") {
+            steps {
+                script {
+                    sh "curl -v -u admin:admin --upload-file UI.tar http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar"
+                }
+            }
+        }
+        stage('run deploy job') {
+steps {
+build "qa-UI-deploy"
+}
+}
+        
+       
+      
+        
+    }
+    
+}
