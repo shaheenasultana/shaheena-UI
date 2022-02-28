@@ -5,15 +5,15 @@ pipeline {
         stage("build code") {
             steps {
                 script {
-                   sh "tar -cvf ${qa}_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar index.html "
-                   sh "ls -l ${qa}_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar"
+                   sh "tar -cvf a.tar index.html "
+                   sh "ls -l a.tar"
                 }
                }
             }
         stage("publish to nexus") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file ${qa}_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar http://67.202.11.212:8081/repository/UI-builds/dev/${qa}_PHP_Code_${my_date}_BUILD_${BUILD_NUMBER}.tar"
+                    sh "curl -v -u admin:admin --upload-file a.tar http://67.202.11.212:8081/repository/UI-builds/dev/a.tar"
                 }
             }
         }
