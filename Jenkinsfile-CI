@@ -19,7 +19,7 @@ pipeline {
         }
         stage('run deploy job') {
 steps {
-build "dev-UI-deploy"
+build "prod-UI-deploy"
 }
 }
         
