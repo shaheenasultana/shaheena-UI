@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                      sh '''
-                     ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@18.222.68.96 << EOF
+                     ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@3.20.85.223 << EOF
                      mkdir -p /tmp/shaheena
                      cd /tmp/shaheena
                      curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar
