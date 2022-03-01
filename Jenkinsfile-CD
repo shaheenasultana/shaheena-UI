@@ -1,36 +1,36 @@
 pipeline {
-    agent any 
+    agent any
+    
     stages {
-        stage('execute') {
+        stage("build code") {
             steps {
                 script {
-                     sh '''
-                     ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@18.222.68.96 << EOF
-                     mkdir -p /tmp/shaheena
-                     cd /tmp/shaheena
-                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar
-                     tar -xvf UI.tar
-                     cat index.html
-                     sudo cp index.html /var/www/html
-                     
-                     echo "*** Restarting httpd ***"
-	sudo service httpd status
-	sudo service httpd restart
-	sudo service httpd status
-	ps -ef | grep httpd 
-	date
-                     
-                     
-EOF
-'''
-                    
+                   sh "tar -cvf UI.tar index.html "
+                   sh "ls -l UI.tar"
                 }
-                
+               }
+            }
+        stage("publish to nexus") {
+            steps {
+                script {
+                    sh "curl -v -u admin:admin --upload-file UI.tar http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar"
+                }
+            }
+        }
+        stage('run deploy job') {
+            steps {
+                build "qa-UI-deploy"
                 
             }
             
         }
-        
+        stage('Build') {
+            steps {
+            
+                expression { params.UI-BUILD-NUMBER == "47" }
+                
+            
+        }
+        }
     }
-    
 }
