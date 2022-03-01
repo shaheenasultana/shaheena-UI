@@ -17,6 +17,8 @@ pipeline {
                 }
             }
         }
+        
+        
         stage('run deploy job') {
 steps {
 build "qa-UI-deploy"
