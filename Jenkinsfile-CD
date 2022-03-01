@@ -8,7 +8,7 @@ pipeline {
                      ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@3.134.7.94 << EOF
                      mkdir -p /tmp/shaheena
                      cd /tmp/shaheena
-                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI.tar
+                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/qa/UI.tar
                      tar -xvf UI.tar
                      cat index.html
                      sudo cp index.html /var/www/html
