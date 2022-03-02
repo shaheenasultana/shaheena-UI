@@ -8,8 +8,8 @@ pipeline {
                      ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@18.222.68.96 << EOF
                      mkdir -p /tmp/shaheena
                      cd /tmp/shaheena
-                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI_BUILD_NUMBER.tar
-                     tar -xvf UI_BUILD_NUMBER.tar
+                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/dev/UI-${DEV_UI_BUILD_ID}.tar
+                     tar -xvf UI-${DEV_UI_BUILD_ID}.tar
                      cat index.html
                      sudo cp index.html /var/www/html
                      
@@ -30,14 +30,7 @@ EOF
             }
             
         }
-        stage('Build') {
-            steps {
-            
-                expression { params.UI_BUILD_NUMBER == "51" }
-                
-            
-        }
-        }
+       
         
     }
     
