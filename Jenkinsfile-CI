@@ -20,11 +20,13 @@ pipeline {
         
 
      stage {
+     steps {
      build job: 'dev-UI-deploy', 
-    parameters: [
-        string(name: 'UI_BUILD-NUMBER', value: 'prefix-' + String.valueOf(BUILD_NUMBER))
-    ]
-    }
+     parameters: [
+     string(name: 'UI_BUILD-NUMBER', value: 'prefix-' + String.valueOf(BUILD_NUMBER))
+     ]
+     }
+     }
 
         
        
