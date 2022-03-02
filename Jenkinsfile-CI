@@ -13,10 +13,19 @@ pipeline {
         stage("publish to nexus") {
             steps {
                 script {
-                    sh "curl -v -u admin:admin --upload-file UI-${BUILD_NUMBER}.tar http://67.202.11.212:8081/repository/UI-builds/qa/UI-${BUILD_NUMBER}.tar"
+                    sh "curl -v -u admin:admin --upload-file UI-${env.BUILD_NUMBER}.tar http://67.202.11.212:8081/repository/UI-builds/qa/UI-${BUILD_NUMBER}.tar"
                 }
             }
         }
+        stage("run deploy job")
+                     {
+                         steps {
+                         build job: 'qa-UI-deploy', 
+        parameters: [
+        string(name: 'QA_UI_BUILD_ID', value: "${BUILD_NUMBER}")
+        ]}
+        }
+    }
         
         
        
@@ -26,4 +35,3 @@ pipeline {
         
     }
     
-}
