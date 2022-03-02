@@ -7,24 +7,30 @@ pipeline {
                 script {
                    sh "tar -cvf UI-${BUILD_NUMBER}.tar index.html "
                    sh "ls -l UI-${BUILD_NUMBER}.tar"
+                   
                 }
+               
+                
                }
             }
         stage("publish to nexus") {
             steps {
                 script {
                     sh "curl -v -u admin:admin --upload-file UI-${BUILD_NUMBER}.tar http://67.202.11.212:8081/repository/UI-builds/dev/UI-${BUILD_NUMBER}.tar"
+                     
+                     }
                 }
             }
-        }
-        stage {
-        steps {
-        build job: 'dev-UI-deploy', 
+            stage("run deploy job")
+                     {
+                         steps {
+                         build job: 'dev-UI-deploy', 
         parameters: [
-        string(name: 'UI_BUILD-NUMBER', value: 'prefix-' + String.valueOf(BUILD_NUMBER))
-        ]
+        string(name: 'DEV_UI_BUILD_ID', value: "${BUILD_NUMBER}")
+        ]}
         }
-        }
+    }
+       
 
         
        
@@ -32,4 +38,4 @@ pipeline {
         
     }
     
-}
+
