@@ -8,10 +8,12 @@ pipeline {
                      ssh -i /var/lib/jenkins/keys/dev.pem ec2-user@3.134.7.94 << EOF
                      mkdir -p /tmp/shaheena
                      cd /tmp/shaheena
-                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/qa/UI.tar
-                     tar -xvf UI.tar
+                     curl -u admin:admin -O http://67.202.11.212:8081/repository/UI-builds/qa/UI-${QA_UI_BUILD_ID}.tar
+                     tar -xvf UI-${QA_UI_BUILD_ID}.tar
                      cat index.html
                      sudo cp index.html /var/www/html
+                     
+                    
                      
                      echo "*** Restarting httpd ***"
 	sudo service httpd status
@@ -30,16 +32,11 @@ EOF
             }
             
         }
-	stage('Build') {
-            steps {
-            
-                expression { params.UI-BUILD-NUMBER == "63" }
-                
-            
-        }
-        }
         
         
     }
-    
+    parameters {
+        string(name: 'QA_UI_BUILD_ID', defaultValue: 'null', description: "It checks users policies and find arn's which are expiring exactly given no.of days")
+        
+    }
 }
