@@ -36,7 +36,7 @@ EOF
         
     }
     parameters {
-        string(name: 'QA_UI_BUILD_ID', defaultValue: 'null', description: "It checks users policies and find arn's which are expiring exactly given no.of days")
+        string(name: 'QA_UI_BUILD_ID', defaultValue: 'null', description: "qa environment")
         
     }
 }
