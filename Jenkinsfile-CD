@@ -1,5 +1,9 @@
 pipeline {
     agent any 
+     parameters {
+        string(name: 'QA_UI_BUILD_ID', defaultValue: '', description: "provide QA ui build id")
+        
+    }
     stages {
         stage('execute') {
             steps {
@@ -35,8 +39,5 @@ EOF
         
         
     }
-    parameters {
-        string(name: 'QA_UI_BUILD_ID', defaultValue: 'null', description: "qa environment")
-        
-    }
+    
 }
